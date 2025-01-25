@@ -17,8 +17,8 @@ from redis_client import add_key_value_redis, get_value_redis, delete_key_redis
 
 # CLIENT_ID = 'XXX'
 # CLIENT_SECRET = 'XXX'
-CLIENT_ID = '329147ef-ac8b-4863-bced-77b7b195258f'
-CLIENT_SECRET = 'e59aec7edddef2edf4388ef611b151ab5fc85c61f828df909c147085e8ffb4f1'
+CLIENT_ID = '7ec2a8e5-25d9-4d41-9a36-c885004e7ee5'
+CLIENT_SECRET = ': 82700f8648f0e8cb7df27c19d15918252c1a0800ab793db77a835d6fe2e8c8e1'
 REDIRECT_URI = 'http://localhost:8000/integrations/airtable/oauth2callback'
 authorization_url = f'https://airtable.com/oauth2/v1/authorize?client_id={CLIENT_ID}&response_type=code&owner=user&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Fintegrations%2Fairtable%2Foauth2callback'
 
@@ -99,7 +99,7 @@ async def oauth2callback_airtable(request: Request):
 async def get_airtable_credentials(user_id, org_id):
     credentials = await get_value_redis(f'airtable_credentials:{org_id}:{user_id}')
     if not credentials:
-        raise HTTPException(status_code=400, detail='No credentials found.')
+        raise HTTPException(status_code=400, detail=' ntials found.')
     credentials = json.loads(credentials)
     await delete_key_redis(f'airtable_credentials:{org_id}:{user_id}')
 

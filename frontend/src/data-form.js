@@ -9,6 +9,7 @@ import axios from 'axios';
 const endpointMapping = {
     'Notion': 'notion',
     'Airtable': 'airtable',
+    'Hubspot': 'hubspot',
 };
 
 export const DataForm = ({ integrationType, credentials }) => {
@@ -20,7 +21,9 @@ export const DataForm = ({ integrationType, credentials }) => {
             const formData = new FormData();
             formData.append('credentials', JSON.stringify(credentials));
             const response = await axios.post(`http://localhost:8000/integrations/${endpoint}/load`, formData);
+            console.log(response.data);
             const data = response.data;
+
             setLoadedData(data);
         } catch (e) {
             alert(e?.response?.data?.detail);
@@ -32,21 +35,23 @@ export const DataForm = ({ integrationType, credentials }) => {
             <Box display='flex' flexDirection='column' width='100%'>
                 <TextField
                     label="Loaded Data"
-                    value={loadedData || ''}
-                    sx={{mt: 2}}
+                    value={loadedData ? JSON.stringify(loadedData) : ''}
+                    sx={{ mt: 5 }}
+                    multiline
+                    rows={10}
                     InputLabelProps={{ shrink: true }}
-                    disabled
+
                 />
                 <Button
                     onClick={handleLoad}
-                    sx={{mt: 2}}
+                    sx={{ mt: 2 }}
                     variant='contained'
                 >
                     Load Data
                 </Button>
                 <Button
                     onClick={() => setLoadedData(null)}
-                    sx={{mt: 1}}
+                    sx={{ mt: 1 }}
                     variant='contained'
                 >
                     Clear Data

@@ -9,6 +9,7 @@ class IntegrationItem:
         directory: bool = False,
         parent_path_or_name: Optional[str] = None,
         parent_id: Optional[str] = None,
+        domain: Optional[str] = None,
         name: Optional[str] = None,
         creation_time: Optional[datetime] = None,
         last_modified_time: Optional[datetime] = None,
